@@ -1,4 +1,4 @@
-package developer.multipleds.customer;
+package developer.multipleds.postgres;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.simple.JdbcClient;
@@ -12,7 +12,7 @@ public class CustomerService {
 
     private final JdbcClient jdbcClient;
 
-    public CustomerService(@Qualifier("customerJdbcClient") JdbcClient jdbcClient) {
+    public CustomerService(@Qualifier("postgresJdbcClient") JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
     }
 

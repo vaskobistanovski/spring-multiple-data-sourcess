@@ -1,4 +1,4 @@
-package developer.multipleds.customer;
+package developer.multipleds.postgres;
 
 import java.sql.Timestamp;
 

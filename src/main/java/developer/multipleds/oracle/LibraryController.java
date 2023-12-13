@@ -1,4 +1,4 @@
-package developer.multipleds.book;
+package developer.multipleds.oracle;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,24 +7,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/books")
-public class BookController {
+@RequestMapping("/api/libraries")
+public class LibraryController {
 
-    private final BookService bookService;
+    private final LibraryService libraryService;
 
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
+    public LibraryController(LibraryService libraryService) {
+        this.libraryService = libraryService;
     }
 
     @GetMapping
     public ResponseEntity<?> doFindAll() {
-        final var books = bookService.findAll();
-        return ResponseEntity.ok(books);
+        final var libraries = libraryService.findAll();
+        return ResponseEntity.ok(libraries);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> doFindById(@PathVariable(name = "id") Integer id) {
-        final var book = bookService.findById(id);
-        return ResponseEntity.ok(book);
+        final var library = libraryService.findById(id);
+        return ResponseEntity.ok(library);
     }
 }

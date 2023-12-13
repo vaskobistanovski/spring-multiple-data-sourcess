@@ -1,4 +1,4 @@
-package developer.multipleds.book;
+package developer.multipleds.h2;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
