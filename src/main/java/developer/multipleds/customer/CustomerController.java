@@ -1,4 +1,4 @@
-package developer.multipleds.user;
+package developer.multipleds.customer;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,23 +8,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
+public class CustomerController {
 
-    private final UserService userService;
+    private final CustomerService customerService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     @GetMapping
     public ResponseEntity<?> doFindAll() {
-        final var users = userService.findAll();
+        final var users = customerService.findAll();
         return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> doFindById(@PathVariable(name = "id") Integer id) {
-        final var user = userService.findById(id);
+        final var user = customerService.findById(id);
         return ResponseEntity.ok(user);
     }
 }
