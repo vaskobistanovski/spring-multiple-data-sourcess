@@ -83,6 +83,7 @@ public class DataSourceConfiguration {
                 .url(dataSourceProperties.getUrl())
                 .username(dataSourceProperties.getUsername())
                 .password(dataSourceProperties.getPassword())
+                .driverClassName(dataSourceProperties.getDriverClassName())
                 .build();
     }
 
@@ -96,19 +97,19 @@ public class DataSourceConfiguration {
         settings.setSchemaLocations(List.of("classpath:library-schema.sql"));
 
         // set mode = EMBEDDED, because the H2 is in memory database
-        settings.setMode(DatabaseInitializationMode.EMBEDDED);
+        settings.setMode(DatabaseInitializationMode.ALWAYS);
 
         return new DataSourceScriptDatabaseInitializer(dataSource, settings);
     }
 
-    /* User Datasource Configuration */
+    /* Customer Datasource Configuration */
 
     /**
      * Load the database configuration properties
      */
     @Bean
-    @ConfigurationProperties("app.datasource.user")
-    public DataSourceProperties userDataSourceProperties() {
+    @ConfigurationProperties("app.datasource.customer")
+    public DataSourceProperties customerDataSourceProperties() {
         return new DataSourceProperties();
     }
 
@@ -116,7 +117,7 @@ public class DataSourceConfiguration {
      * Establish database connection, using the database properties
      */
     @Bean
-    public DataSource userDataSource(@Qualifier("userDataSourceProperties") DataSourceProperties dataSourceProperties) {
+    public DataSource customerDataSource(@Qualifier("customerDataSourceProperties") DataSourceProperties dataSourceProperties) {
 
         return DataSourceBuilder
                 .create()
@@ -131,10 +132,10 @@ public class DataSourceConfiguration {
      * Set the desired DDL script to apply to the database
      */
     @Bean
-    DataSourceScriptDatabaseInitializer userDataSourceScriptDatabaseInitializer(@Qualifier("userDataSource") DataSource dataSource) {
+    DataSourceScriptDatabaseInitializer customerDataSourceScriptDatabaseInitializer(@Qualifier("customerDataSource") DataSource dataSource) {
 
         var settings = new DatabaseInitializationSettings();
-        settings.setSchemaLocations(List.of("classpath:user-schema.sql"));
+        settings.setSchemaLocations(List.of("classpath:customer-schema.sql"));
 
         // set mode = ALWAYS, because the postgres id local database
         settings.setMode(DatabaseInitializationMode.ALWAYS);

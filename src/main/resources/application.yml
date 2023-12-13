@@ -6,16 +6,16 @@ spring:
 app:
   datasource:
     book:
+      driverClassName: oracle.jdbc.OracleDriver
       url: jdbc:h2:mem:book
       username: sa
-      password: pass
+      password: ENC(WozHQPCYYUcrZ7vND3e9Cg==)
     library:
-      url: jdbc:h2:mem:library
-      username: sa
-      password: pass
-    user:
+      url: jdbc:oracle:thin:@localhost:1521:orcl
+      username: PROS
+      password: ENC(3j9YLxSQpzWH/IJHbIqG0A==)
+    customer:
       driverClassName: org.postgresql.Driver
       url: jdbc:postgresql://localhost:5432/postgres
       username: postgres
-      password: pass
-
+      password: ENC(WozHQPCYYUcrZ7vND3e9Cg==)

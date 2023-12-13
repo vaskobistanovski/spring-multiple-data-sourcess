@@ -6,18 +6,19 @@ CREATE TABLE BOOK (
     ID INT PRIMARY KEY NOT NULL,
     TITLE VARCHAR(255) NOT NULL,
     AUTHOR VARCHAR(255) NOT NULL,
-    PUBLISH_DATE DATE NOT NULL
+    PUBLISH_DATE DATE NOT NULL,
+    CREATED_DATE TIMESTAMP NOT NULL
 );
 
 -- Inserting the first record
-INSERT INTO BOOK (ID, TITLE, AUTHOR, PUBLISH_DATE)
-VALUES (1, 'The Catcher in the Rye', 'J.D. Salinger', '1951-07-16');
+INSERT INTO BOOK (ID, TITLE, AUTHOR, PUBLISH_DATE, CREATED_DATE)
+VALUES (1, 'The Catcher in the Rye', 'J.D. Salinger', '1951-07-16', current_timestamp);
 
 -- Inserting the second record
-INSERT INTO BOOK (ID, TITLE, AUTHOR, PUBLISH_DATE)
-VALUES (2, 'To Kill a Mockingbird', 'Harper Lee', '1960-07-11');
+INSERT INTO BOOK (ID, TITLE, AUTHOR, PUBLISH_DATE, CREATED_DATE)
+VALUES (2, 'To Kill a Mockingbird', 'Harper Lee', '1960-07-11', current_timestamp);
 
 -- Inserting the third record
-INSERT INTO BOOK (ID, TITLE, AUTHOR, PUBLISH_DATE)
-VALUES (3, '1984', 'George Orwell', '1949-06-08');
+INSERT INTO BOOK (ID, TITLE, AUTHOR, PUBLISH_DATE, CREATED_DATE)
+VALUES (3, '1984', 'George Orwell', '1949-06-08', current_timestamp);
 

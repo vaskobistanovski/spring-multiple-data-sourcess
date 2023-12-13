@@ -21,7 +21,7 @@ public class JdbcClientConfiguration {
     }
 
     @Bean
-    JdbcClient userJdbcClient(@Qualifier("userDataSource") DataSource dataSource) {
+    JdbcClient customerJdbcClient(@Qualifier("customerDataSource") DataSource dataSource) {
         return JdbcClient.create(dataSource);
     }
 }
