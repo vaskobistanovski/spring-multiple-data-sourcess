@@ -18,6 +18,11 @@ import java.util.List;
 @Configuration(proxyBeanMethods = false)
 public class DataSourceConfiguration {
 
+    private static final String H2_SQL_SCHEMA = "classpath:h2-schema.sql";
+    private static final String ORACLE_SQL_SCHEMA = "classpath:oracle-schema.sql";
+    private static final String POSTGRES_SQL_SCHEMA = "classpath:postgres-schema.sql";
+
+
 
     /* Book Datasource Configuration */
 
@@ -26,8 +31,8 @@ public class DataSourceConfiguration {
      */
     @Bean
     @Primary
-    @ConfigurationProperties("app.datasource.book")
-    public DataSourceProperties bookDataSourceProperties() {
+    @ConfigurationProperties("app.datasource.h2")
+    public DataSourceProperties h2DataSourceProperties() {
         return new DataSourceProperties();
     }
 
@@ -36,7 +41,7 @@ public class DataSourceConfiguration {
      */
     @Bean
     @Primary
-    public DataSource bookDataSource(@Qualifier("bookDataSourceProperties") DataSourceProperties dataSourceProperties) {
+    public DataSource h2DataSource(@Qualifier("h2DataSourceProperties") DataSourceProperties dataSourceProperties) {
 
         return DataSourceBuilder
                 .create()
@@ -50,10 +55,10 @@ public class DataSourceConfiguration {
      * Set the desired DDL script to apply to the database
      */
     @Bean
-    DataSourceScriptDatabaseInitializer bookDataSourceScriptDatabaseInitializer(@Qualifier("bookDataSource") DataSource dataSource) {
+    DataSourceScriptDatabaseInitializer h2DataSourceScriptDatabaseInitializer(@Qualifier("h2DataSource") DataSource dataSource) {
 
         var settings = new DatabaseInitializationSettings();
-        settings.setSchemaLocations(List.of("classpath:book-schema.sql"));
+        settings.setSchemaLocations(List.of(H2_SQL_SCHEMA));
 
         // set mode = EMBEDDED, because the H2 is in memory database
         settings.setMode(DatabaseInitializationMode.EMBEDDED);
@@ -67,8 +72,8 @@ public class DataSourceConfiguration {
      * Load the database configuration properties
      */
     @Bean
-    @ConfigurationProperties("app.datasource.library")
-    public DataSourceProperties libraryDataSourceProperties() {
+    @ConfigurationProperties("app.datasource.oracle")
+    public DataSourceProperties oracleDataSourceProperties() {
         return new DataSourceProperties();
     }
 
@@ -76,7 +81,7 @@ public class DataSourceConfiguration {
      * Establish database connection, using the database properties
      */
     @Bean
-    public DataSource libraryDataSource(@Qualifier("libraryDataSourceProperties") DataSourceProperties dataSourceProperties) {
+    public DataSource oracleDataSource(@Qualifier("oracleDataSourceProperties") DataSourceProperties dataSourceProperties) {
 
         return DataSourceBuilder
                 .create()
@@ -91,12 +96,12 @@ public class DataSourceConfiguration {
      * Set the desired DDL script to apply to the database
      */
     @Bean
-    DataSourceScriptDatabaseInitializer libraryDataSourceScriptDatabaseInitializer(@Qualifier("libraryDataSource") DataSource dataSource) {
+    DataSourceScriptDatabaseInitializer oracleDataSourceScriptDatabaseInitializer(@Qualifier("oracleDataSource") DataSource dataSource) {
 
         var settings = new DatabaseInitializationSettings();
-        settings.setSchemaLocations(List.of("classpath:library-schema.sql"));
+        settings.setSchemaLocations(List.of(ORACLE_SQL_SCHEMA));
 
-        // set mode = EMBEDDED, because the H2 is in memory database
+        // set mode = ALWAYS, because the oracle is local database
         settings.setMode(DatabaseInitializationMode.ALWAYS);
 
         return new DataSourceScriptDatabaseInitializer(dataSource, settings);
@@ -108,8 +113,8 @@ public class DataSourceConfiguration {
      * Load the database configuration properties
      */
     @Bean
-    @ConfigurationProperties("app.datasource.customer")
-    public DataSourceProperties customerDataSourceProperties() {
+    @ConfigurationProperties("app.datasource.postgres")
+    public DataSourceProperties postgresDataSourceProperties() {
         return new DataSourceProperties();
     }
 
@@ -117,7 +122,7 @@ public class DataSourceConfiguration {
      * Establish database connection, using the database properties
      */
     @Bean
-    public DataSource customerDataSource(@Qualifier("customerDataSourceProperties") DataSourceProperties dataSourceProperties) {
+    public DataSource postgresDataSource(@Qualifier("postgresDataSourceProperties") DataSourceProperties dataSourceProperties) {
 
         return DataSourceBuilder
                 .create()
@@ -132,12 +137,12 @@ public class DataSourceConfiguration {
      * Set the desired DDL script to apply to the database
      */
     @Bean
-    DataSourceScriptDatabaseInitializer customerDataSourceScriptDatabaseInitializer(@Qualifier("customerDataSource") DataSource dataSource) {
+    DataSourceScriptDatabaseInitializer postgresDataSourceScriptDatabaseInitializer(@Qualifier("postgresDataSource") DataSource dataSource) {
 
         var settings = new DatabaseInitializationSettings();
-        settings.setSchemaLocations(List.of("classpath:customer-schema.sql"));
+        settings.setSchemaLocations(List.of(POSTGRES_SQL_SCHEMA));
 
-        // set mode = ALWAYS, because the postgres id local database
+        // set mode = ALWAYS, because the postgres is local database
         settings.setMode(DatabaseInitializationMode.ALWAYS);
 
         return new DataSourceScriptDatabaseInitializer(dataSource, settings);

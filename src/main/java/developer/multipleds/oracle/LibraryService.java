@@ -1,4 +1,4 @@
-package developer.multipleds.library;
+package developer.multipleds.oracle;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.simple.JdbcClient;
@@ -12,7 +12,7 @@ public class LibraryService {
 
     private final JdbcClient jdbcClient;
 
-    public LibraryService(@Qualifier("libraryJdbcClient") JdbcClient jdbcClient) {
+    public LibraryService(@Qualifier("oracleJdbcClient") JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
     }
 

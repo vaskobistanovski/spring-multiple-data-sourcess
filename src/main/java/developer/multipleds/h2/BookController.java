@@ -1,4 +1,4 @@
-package developer.multipleds.library;
+package developer.multipleds.h2;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,24 +7,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/libraries")
-public class LibraryController {
+@RequestMapping("/api/books")
+public class BookController {
 
-    private final LibraryService libraryService;
+    private final BookService bookService;
 
-    public LibraryController(LibraryService libraryService) {
-        this.libraryService = libraryService;
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
     }
 
     @GetMapping
     public ResponseEntity<?> doFindAll() {
-        final var libraries = libraryService.findAll();
-        return ResponseEntity.ok(libraries);
+        final var books = bookService.findAll();
+        return ResponseEntity.ok(books);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> doFindById(@PathVariable(name = "id") Integer id) {
-        final var library = libraryService.findById(id);
-        return ResponseEntity.ok(library);
+        final var book = bookService.findById(id);
+        return ResponseEntity.ok(book);
     }
 }

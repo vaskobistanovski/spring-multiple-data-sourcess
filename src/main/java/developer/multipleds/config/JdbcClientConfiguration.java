@@ -11,17 +11,17 @@ import javax.sql.DataSource;
 public class JdbcClientConfiguration {
 
     @Bean
-    JdbcClient bookJdbcClient(@Qualifier("bookDataSource") DataSource dataSource) {
+    JdbcClient h2JdbcClient(@Qualifier("h2DataSource") DataSource dataSource) {
         return JdbcClient.create(dataSource);
     }
 
     @Bean
-    JdbcClient libraryJdbcClient(@Qualifier("libraryDataSource") DataSource dataSource) {
+    JdbcClient oracleJdbcClient(@Qualifier("oracleDataSource") DataSource dataSource) {
         return JdbcClient.create(dataSource);
     }
 
     @Bean
-    JdbcClient customerJdbcClient(@Qualifier("customerDataSource") DataSource dataSource) {
+    JdbcClient postgresJdbcClient(@Qualifier("postgresDataSource") DataSource dataSource) {
         return JdbcClient.create(dataSource);
     }
 }

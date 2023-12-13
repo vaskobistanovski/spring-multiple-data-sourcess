@@ -1,4 +1,4 @@
-package developer.multipleds.book;
+package developer.multipleds.h2;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.simple.JdbcClient;
@@ -12,7 +12,7 @@ public class BookService {
 
     private final JdbcClient jdbcClient;
 
-    public BookService(@Qualifier("bookJdbcClient") JdbcClient jdbcClient) {
+    public BookService(@Qualifier("h2JdbcClient") JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
     }
 
